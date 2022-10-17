@@ -12,6 +12,7 @@ import androidx.core.content.ContentProviderCompat
 import androidx.core.graphics.drawable.toDrawable
 import androidx.fragment.app.viewModels
 import androidx.recyclerview.widget.LinearLayoutManager
+import androidx.recyclerview.widget.RecyclerView
 import androidx.recyclerview.widget.RecyclerView.LayoutManager
 import com.bumptech.glide.Glide
 import com.example.hammertest.R
@@ -52,6 +53,13 @@ class MenuFragment : Fragment() {
             viewModel.loadAllFood()
         }
 
+        binding.foodRv.addOnScrollListener(object : RecyclerView.OnScrollListener() {
+            override fun onScrolled(recyclerView: RecyclerView, dx: Int, dy: Int) {
+                super.onScrolled(recyclerView, dx, dy)
+                if (dy > 0) binding.cardView.cardElevation = 10f
+            }
+        })
+
     }
 
     override fun onDestroyView() {
@@ -62,10 +70,10 @@ class MenuFragment : Fragment() {
     private fun setupBannerRecyclerView() {
         bannerListAdapter = BannerListAdapter(
             listOf(
-                R.drawable.pizza.toDrawable(),
-                R.drawable.pizza.toDrawable(),
-                R.drawable.pizza.toDrawable(),
-                R.drawable.pizza.toDrawable()
+                R.drawable.pizza_banner.toDrawable(),
+                R.drawable.pizza_banner.toDrawable(),
+                R.drawable.pizza_banner.toDrawable(),
+                R.drawable.pizza_banner.toDrawable()
             )
         )
         binding.bannerRv.adapter = bannerListAdapter

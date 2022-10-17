@@ -11,7 +11,7 @@
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:background="@color/white"
-        android:elevation="0dp"
+        app:elevation="0dp"
         app:liftOnScroll="true"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent">
@@ -25,7 +25,8 @@
                 android:id="@+id/banner_rv"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:layout_marginEnd="16dp" />
+                android:layout_marginEnd="16dp"
+                android:layout_marginBottom="24dp"/>
 
         </com.google.android.material.appbar.CollapsingToolbarLayout>
 
@@ -40,27 +41,27 @@
         app:layout_behavior="@string/appbar_scrolling_view_behavior"
         android:layout_marginTop="0dp">
 
-        <LinearLayout
+        <androidx.cardview.widget.CardView
+            android:id="@+id/cardView"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:orientation="vertical"
-            android:elevation="5dp">
+            app:cardElevation="0dp">
 
             <com.google.android.material.tabs.TabLayout
                 android:id="@+id/tabLayout"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:layout_marginEnd="16dp"
                 android:layout_marginStart="13dp"
-                android:layout_marginTop="12dp"
+                android:layout_marginEnd="16dp"
+                android:layout_marginBottom="16dp"
                 app:tabBackground="@drawable/tab_shape"
                 app:tabIndicatorHeight="0dp"
                 app:tabMode="scrollable"
-                app:tabRippleColor="@color/app_white"
                 app:tabPaddingBottom="8dp"
                 app:tabPaddingEnd="20dp"
                 app:tabPaddingStart="20dp"
                 app:tabPaddingTop="8dp"
+                app:tabRippleColor="@color/app_white"
                 app:tabTextAppearance="@style/MineCustomTabText">
 
                 <com.google.android.material.tabs.TabItem
@@ -76,7 +77,6 @@
                 <com.google.android.material.tabs.TabItem
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
-                    android:elevation="3dp"
                     android:text="Десерты" />
 
                 <com.google.android.material.tabs.TabItem
@@ -89,14 +89,13 @@
                     android:layout_height="wrap_content"
                     android:text="Что-то еще" />
             </com.google.android.material.tabs.TabLayout>
-        </LinearLayout>
+        </androidx.cardview.widget.CardView>
 
 
         <androidx.recyclerview.widget.RecyclerView
             android:id="@+id/foodRv"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:layout_marginTop="16dp"
             android:visibility="gone" />
 
         <ProgressBar

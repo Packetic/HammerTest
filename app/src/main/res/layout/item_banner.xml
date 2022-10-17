@@ -16,7 +16,7 @@
             android:layout_width="300dp"
             android:layout_height="112dp"
             android:scaleType="fitXY"
-            android:src="@drawable/pizza" />
+            android:src="@drawable/pizza_banner" />
     </androidx.cardview.widget.CardView>
 
 </FrameLayout>
