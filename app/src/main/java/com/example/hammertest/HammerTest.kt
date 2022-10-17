@@ -4,7 +4,8 @@ import android.app.Application
 import dagger.hilt.android.HiltAndroidApp
 
 @HiltAndroidApp
-class HammerTest: Application() {
+// Базовый класс приложения
+class HammerTest : Application() {
 
     companion object {
         private lateinit var instance: HammerTest

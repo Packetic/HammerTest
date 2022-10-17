@@ -1,10 +1,12 @@
 package com.example.hammertest.ui.fragments
 
 import android.os.Bundle
+import android.util.Log
 import androidx.fragment.app.Fragment
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
+import android.view.ViewTreeObserver
 import android.widget.Toast
 import androidx.core.content.ContentProviderCompat
 import androidx.core.graphics.drawable.toDrawable
@@ -17,6 +19,7 @@ import com.example.hammertest.databinding.FragmentMenuBinding
 import com.example.hammertest.ui.adapters.BannerListAdapter
 import com.example.hammertest.ui.adapters.FoodListAdapter
 import com.example.hammertest.ui.stateholder.FoodViewModel
+import com.google.android.material.snackbar.Snackbar
 import com.google.android.material.tabs.TabLayout
 import dagger.hilt.android.AndroidEntryPoint
 
@@ -43,6 +46,12 @@ class MenuFragment : Fragment() {
         observeViewModel()
         setupBannerRecyclerView()
         setupFoodRecyclerView()
+
+        // Если нажать на ретрай, снова грузим ресайклер
+        binding.retry.setOnClickListener {
+            viewModel.loadAllFood()
+        }
+
     }
 
     override fun onDestroyView() {
@@ -51,12 +60,14 @@ class MenuFragment : Fragment() {
     }
 
     private fun setupBannerRecyclerView() {
-        bannerListAdapter = BannerListAdapter(listOf(
-            R.drawable.pizza.toDrawable(),
-            R.drawable.pizza.toDrawable(),
-            R.drawable.pizza.toDrawable(),
-            R.drawable.pizza.toDrawable()
-        ))
+        bannerListAdapter = BannerListAdapter(
+            listOf(
+                R.drawable.pizza.toDrawable(),
+                R.drawable.pizza.toDrawable(),
+                R.drawable.pizza.toDrawable(),
+                R.drawable.pizza.toDrawable()
+            )
+        )
         binding.bannerRv.adapter = bannerListAdapter
         binding.bannerRv.layoutManager = LinearLayoutManager(
             context, LinearLayoutManager.HORIZONTAL, false
@@ -65,7 +76,10 @@ class MenuFragment : Fragment() {
 
     private fun setupFoodRecyclerView() {
         foodListAdapter = FoodListAdapter()
-        binding.foodRv.layoutManager = LinearLayoutManager(context)
+        binding.foodRv.apply {
+            adapter = foodListAdapter
+            layoutManager = LinearLayoutManager(context)
+        }
     }
 
     private fun observeViewModel() {
@@ -76,8 +90,19 @@ class MenuFragment : Fragment() {
         }
 
         viewModel.isError.observe(viewLifecycleOwner) {
-            if (it != null) {
-                Toast.makeText(context, "Error occured", Toast.LENGTH_LONG).show()
+            if (it == true) {
+                binding.progressBar.visibility = View.GONE
+                binding.foodRv.visibility = View.GONE
+                binding.somethingWrong.visibility = View.VISIBLE
+                binding.retry.visibility = View.VISIBLE
+            }
+        }
+        viewModel.isSuccess.observe(viewLifecycleOwner) {
+            if (it == true) {
+                binding.foodRv.visibility = View.VISIBLE
+                binding.retry.visibility = View.GONE
+                binding.somethingWrong.visibility = View.GONE
+                binding.progressBar.visibility = View.GONE
             }
         }
     }

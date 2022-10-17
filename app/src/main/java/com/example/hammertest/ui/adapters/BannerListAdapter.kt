@@ -6,16 +6,16 @@ import android.view.ViewGroup
 import androidx.recyclerview.widget.RecyclerView
 import com.example.hammertest.databinding.ItemBannerBinding
 
-class BannerListAdapter(var listData: List<Drawable>):
+class BannerListAdapter(var listData: List<Drawable>) :
     RecyclerView.Adapter<BannerListAdapter.BannerViewHolder>() {
 
     private lateinit var binding: ItemBannerBinding
 
-    inner class BannerViewHolder(private val binding: ItemBannerBinding):
+    inner class BannerViewHolder(private val binding: ItemBannerBinding) :
         RecyclerView.ViewHolder(binding.root) {
-            fun bind(item: Drawable) {
-                binding.bannerImage.background = item
-            }
+        fun bind(item: Drawable) {
+            binding.bannerImage.background = item
+        }
     }
 
     override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): BannerViewHolder {

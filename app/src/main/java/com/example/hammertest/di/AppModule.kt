@@ -1,9 +1,9 @@
 package com.example.hammertest.di
 
-import com.example.hammertest.data.ApiHelperImpl
-import com.example.hammertest.data.ApiService
-import com.example.hammertest.domain.ApiHelper
-import com.example.hammertest.domain.GetAllFoodUseCase
+import com.example.hammertest.data.retrofit.ApiHelperImpl
+import com.example.hammertest.data.retrofit.ApiService
+import com.example.hammertest.domain.interfaces.ApiHelper
+import com.example.hammertest.domain.usecase.GetAllFoodUseCase
 import dagger.Module
 import dagger.Provides
 import dagger.hilt.InstallIn
@@ -12,11 +12,12 @@ import retrofit2.Retrofit
 import retrofit2.converter.gson.GsonConverterFactory
 import javax.inject.Singleton
 
+// Все зависимости для внедрения в классы
 @Module
 @InstallIn(SingletonComponent::class)
 object AppModule {
     @Provides
-    fun providesBaseUrl(): String = "https://www.themealdb.com/api/json/v1/1/"
+    fun providesBaseUrl(): String = "https://www.themealdb.com/api/json/v1/"
 
     @Provides
     @Singleton

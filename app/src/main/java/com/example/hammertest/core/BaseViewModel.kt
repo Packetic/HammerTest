@@ -6,7 +6,7 @@ import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.launch
 import kotlinx.coroutines.withContext
 
-
+// Базовая вью модель, от которой надо наследоваться, если нам надо обрабатывать ошибки
 abstract class BaseViewModel : ViewModel() {
 
     protected fun CoroutineScope.execute(

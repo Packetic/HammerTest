@@ -1,102 +1,132 @@
 <?xml version="1.0" encoding="utf-8"?>
-<androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
+<androidx.coordinatorlayout.widget.CoordinatorLayout xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     tools:context=".ui.fragments.MenuFragment">
 
-    <androidx.appcompat.widget.Toolbar
+    <com.google.android.material.appbar.AppBarLayout
         android:id="@+id/appbar"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
+        android:background="@color/white"
+        android:elevation="0dp"
+        app:liftOnScroll="true"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent">
 
-            <TextView
-                android:id="@+id/textView"
-                android:layout_width="wrap_content"
+        <com.google.android.material.appbar.CollapsingToolbarLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            app:layout_scrollFlags="scroll|exitUntilCollapsed">
+
+            <androidx.recyclerview.widget.RecyclerView
+                android:id="@+id/banner_rv"
+                android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:layout_marginStart="16dp"
-                android:layout_marginTop="35dp"
-                android:layout_marginBottom="35dp"
-                android:text="Москва"
-                android:textColor="@color/header_color"
-                android:textSize="16sp"
-                android:textStyle="bold" />
+                android:layout_marginEnd="16dp" />
 
-            <ImageView
-                android:layout_width="wrap_content"
+        </com.google.android.material.appbar.CollapsingToolbarLayout>
+
+    </com.google.android.material.appbar.AppBarLayout>
+
+
+    <LinearLayout
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:orientation="vertical"
+        android:clipToPadding="false"
+        app:layout_behavior="@string/appbar_scrolling_view_behavior"
+        android:layout_marginTop="0dp">
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:orientation="vertical"
+            android:elevation="5dp">
+
+            <com.google.android.material.tabs.TabLayout
+                android:id="@+id/tabLayout"
+                android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:layout_marginStart="14dp"
-                android:layout_marginTop="35dp"
-                android:layout_marginBottom="35dp"
-                android:src="@drawable/ic_baseline_keyboard_arrow_down_24" />
+                android:layout_marginEnd="16dp"
+                android:layout_marginStart="13dp"
+                android:layout_marginTop="12dp"
+                app:tabBackground="@drawable/tab_shape"
+                app:tabIndicatorHeight="0dp"
+                app:tabMode="scrollable"
+                app:tabRippleColor="@color/app_white"
+                app:tabPaddingBottom="8dp"
+                app:tabPaddingEnd="20dp"
+                app:tabPaddingStart="20dp"
+                app:tabPaddingTop="8dp"
+                app:tabTextAppearance="@style/MineCustomTabText">
 
-    </androidx.appcompat.widget.Toolbar>
+                <com.google.android.material.tabs.TabItem
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:text="Пицца" />
 
-    <androidx.recyclerview.widget.RecyclerView
-        android:id="@+id/banner_rv"
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:layout_marginEnd="16dp"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/appbar" />
+                <com.google.android.material.tabs.TabItem
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:text="Комбо" />
+
+                <com.google.android.material.tabs.TabItem
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:elevation="3dp"
+                    android:text="Десерты" />
+
+                <com.google.android.material.tabs.TabItem
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:text="Напитки" />
+
+                <com.google.android.material.tabs.TabItem
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:text="Что-то еще" />
+            </com.google.android.material.tabs.TabLayout>
+        </LinearLayout>
 
 
-    <com.google.android.material.tabs.TabLayout
-        android:id="@+id/tabLayout"
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:layout_marginStart="13dp"
-        android:layout_marginTop="24dp"
-        android:layout_marginEnd="16dp"
-        app:tabTextAppearance="@style/MineCustomTabText"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:tabPaddingTop="8dp"
-        app:tabPaddingBottom="8dp"
-        app:tabPaddingStart="20dp"
-        app:tabPaddingEnd="20dp"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/banner_rv"
-        app:tabBackground="@drawable/tab_shape"
-        app:tabIndicatorAnimationMode="elastic"
-        app:tabIndicatorHeight="0dp"
-        app:tabMode="scrollable">
-
-        <com.google.android.material.tabs.TabItem
-            android:layout_width="wrap_content"
+        <androidx.recyclerview.widget.RecyclerView
+            android:id="@+id/foodRv"
+            android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:text="Пицца" />
+            android:layout_marginTop="16dp"
+            android:visibility="gone" />
 
-        <com.google.android.material.tabs.TabItem
-            android:layout_width="wrap_content"
+        <ProgressBar
+            android:id="@+id/progressBar"
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:indeterminateDrawable="@drawable/progress_bar_drawable"
+            android:layout_marginTop="30dp" />
+
+        <TextView
+            android:id="@+id/somethingWrong"
+            android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:text="Комбо" />
+            android:layout_marginTop="30dp"
+            android:text="Что-то пошло не так :("
+            android:textAlignment="center"
+            android:textSize="20sp"
+            android:visibility="gone" />
 
-        <com.google.android.material.tabs.TabItem
-            android:layout_width="wrap_content"
+        <TextView
+            android:id="@+id/retry"
+            android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:text="Десерты" />
+            android:layout_marginTop="10dp"
+            android:text="Перезагрузить"
+            android:textAlignment="center"
+            android:textColor="@color/app_pink"
+            android:textSize="20sp"
+            android:visibility="gone" />
+    </LinearLayout>
 
-        <com.google.android.material.tabs.TabItem
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:text="Напитки" />
 
-        <com.google.android.material.tabs.TabItem
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:text="Что-то еще" />
-    </com.google.android.material.tabs.TabLayout>
-
-    <androidx.recyclerview.widget.RecyclerView
-        android:id="@+id/foodRv"
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:layout_marginTop="16dp"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/tabLayout" />
-
-</androidx.constraintlayout.widget.ConstraintLayout>
+</androidx.coordinatorlayout.widget.CoordinatorLayout>

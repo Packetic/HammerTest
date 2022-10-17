@@ -3,7 +3,7 @@
     xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
-    android:layout_height="match_parent">
+    android:layout_height="wrap_content">
 
     <androidx.cardview.widget.CardView
         android:id="@+id/cardView"
@@ -24,7 +24,7 @@
 
     <TextView
         android:id="@+id/foodHeader"
-        android:layout_width="wrap_content"
+        android:layout_width="170dp"
         android:layout_height="wrap_content"
         android:layout_marginStart="22dp"
         android:text="Ветчина и грибы"
@@ -40,7 +40,22 @@
         android:layout_marginTop="8dp"
         android:text="Ветчина,шампиньоны, увеличинная порция моцареллы, томатный соус"
         android:textColor="#AAAAAD"
-        android:textSize="14dp"
+        android:textSize="14sp"
         app:layout_constraintStart_toStartOf="@+id/foodHeader"
         app:layout_constraintTop_toBottomOf="@+id/foodHeader" />
+
+    <com.google.android.material.button.MaterialButton
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="8dp"
+        android:backgroundTint="@color/app_white"
+        android:text="от 345 р"
+        android:textAllCaps="false"
+        android:textColor="@color/app_pink"
+        android:textSize="13sp"
+        app:layout_constraintEnd_toEndOf="@+id/foodDescription"
+        app:layout_constraintTop_toBottomOf="@+id/foodDescription"
+        app:strokeColor="@color/app_pink"
+        app:strokeWidth="1dp" />
+
 </androidx.constraintlayout.widget.ConstraintLayout>
